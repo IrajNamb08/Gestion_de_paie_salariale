@@ -9,7 +9,7 @@
                     </button>
                 </form>
                 <div class="header-button">
-                    <div class="noti-wrap">
+                    {{-- <div class="noti-wrap">
                         <div class="noti__item js-item-menu">
                             <i class="zmdi zmdi-comment-more"></i>
                             <span class="quantity">1</span>
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="account-wrap">
                         @if (Auth::user())
                             <div class="account-item clearfix js-item-menu">
@@ -139,20 +139,16 @@
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
-                                                    <a href="#">{{ Auth::user()->nom }}</a>
+                                                    {{ Auth::user()->nom }}
                                                 </h5>
                                                 <span class="email">{{ Auth::user()->email }}</span>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-account"></i>Account</a>
-                                            </div>
-                                            <div class="account-dropdown__item">
                                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                                    <i class="zmdi zmdi-settings"></i>Logout
+                                                    <i class="zmdi zmdi-settings"></i>Déconnexion
                                                 </a>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                         @csrf

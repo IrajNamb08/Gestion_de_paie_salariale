@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FonctionController;
+use App\Http\Controllers\DepartementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,27 +21,46 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('auth.login');
 });
-
 Auth::routes();
 
 // Route pour le DRH
 Route::middleware(['auth', 'user-access:drh'])->group(function () {
-    Route::get('/home',[HomeController::class,'index'])->name('home');
+    Route::get('/',[HomeController::class,'index'])->name('home');
+    Route::get('/utilisateurs',[UserController::class,'index'])->name('drh.liste');
+    Route::get('/utilisateurs/ajout',[UserController::class,'create'])->name('drh.ajout');
+    Route::post('/utilisateurs/ajout',[UserController::class,'store'])->name('drh.store');
+    Route::get('/utilisateurs/{id}',[UserController::class,'show'])->name('drh.edit');
+    Route::put('/utilisateurs/{id}',[UserController::class,'update'])->name('drh.update');
+    Route::delete('/utilisateurs/{id}',[UserController::class,'destroy'])->name('drh.delete');
 });
 
 // Route pour le RH
 Route::middleware(['auth', 'user-access:rh'])->group(function () {
-    Route::get('/rh/home',[HomeController::class,'rhHome'])->name('rh.home');
+    Route::get('/rh',[HomeController::class,'rhHome'])->name('rh.home');
 });
 
 // Route pour le DG
 Route::middleware(['auth', 'user-access:dg'])->group(function () {
-    Route::get('/dg/home',[HomeController::class,'dgHome'])->name('dg.home');
+    Route::get('/dg',[HomeController::class,'dgHome'])->name('dg.home');
 });
 
+Route::middleware('auth')->prefix('departement')->controller(DepartementController::class)->group(function(){
+    Route::get('/liste','index')->name('departement.index');
+    Route::get('/ajout','create')->name('departement.ajout');
+    Route::post('/ajout','store')->name('departement.store');
+    Route::get('/{id}','show')->name('departement.edit');
+    Route::put('/{id}','update')->name('departement.update');
+    Route::delete('/{id}','destroy')->name('departement.delete');
+});
+Route::middleware('auth')->prefix('fonction')->controller(FonctionController::class)->group(function(){
+    Route::get('/liste','index')->name('fonction.index');
+    Route::get('/ajout','create')->name('fonction.ajout');
+    Route::post('/ajout','store')->name('fonction.store');
+    Route::get('/{fonction}','show')->name('fonction.edit');
+    Route::put('/{fonction}','update')->name('fonction.update');
+});
 // Route pour le DAF
 Route::middleware(['auth', 'user-access:daf'])->group(function () {
-    Route::get('/daf/home',[HomeController::class,'dafHome'])->name('daf.home');
+    Route::get('/daf',[HomeController::class,'dafHome'])->name('daf.home');
 });
-
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
