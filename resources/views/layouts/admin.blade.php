@@ -91,6 +91,61 @@
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}"></script>
 
+    <script>
+        // $(document).ready(function(){
+        //     $('#departement_id').change(function(event){
+        //         var idDepartement = this.value;
+        //         // alert(idDepartement);
+        //         $('#fonction_id').html('');
+
+        //         $.ajax({
+        //             url:'/departement/fonction',
+        //             type : 'POST',
+        //             dataType : 'json',
+        //             data : {departement_id: idDepartement,_token:"{{ csrf_token() }}"},
+        //             success : function(response){
+        //                 $('#fonction_id').html('<option value="">--Fonction--</option>');
+        //                 $.each(response.fonctions,function(index, val){
+        //                     $('#fonction_id').append('<option value="'+val.id+'"> '+val.fonction+'</option>');
+        //                 });
+        //             }
+        //         });
+        //     });
+        // });
+            $(document).ready(function(){
+            // Charger les fonctions lorsque la page est chargée si un département est déjà sélectionné
+            var initialDepartementId = $('#departement_id').val();
+            @if(isset($employer))
+                var initialFonctionId = {{ $employer->fonction_id }};
+                if(initialDepartementId) {
+                    loadFonctions(initialDepartementId, initialFonctionId);
+                }
+            @endif
+
+            $('#departement_id').change(function(event){
+                var idDepartement = this.value;
+                $('#fonction_id').html('<option value="">--Sélectionnez une fonction--</option>');
+                if(idDepartement) {
+                    loadFonctions(idDepartement);
+                }
+            });
+
+            function loadFonctions(departementId, selectedFonctionId = null) {
+                $.ajax({
+                    url: '/departement/fonction',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {departement_id: departementId, _token: "{{ csrf_token() }}"},
+                    success: function(response){
+                        $.each(response.fonctions, function(index, val){
+                            $('#fonction_id').append('<option value="'+val.id+'" '+ (selectedFonctionId && val.id == selectedFonctionId ? 'selected' : '') +'> '+val.fonction+'</option>');
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>

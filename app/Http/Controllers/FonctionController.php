@@ -58,8 +58,9 @@ class FonctionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Fonction $fonction)
     {
-        //
+        $fonction->delete();
+        return redirect()->route('fonction.index')->with('delete','Fonction supprimé');
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\DepartementController;
 
@@ -43,6 +44,10 @@ Route::middleware(['auth', 'user-access:rh'])->group(function () {
 Route::middleware(['auth', 'user-access:dg'])->group(function () {
     Route::get('/dg',[HomeController::class,'dgHome'])->name('dg.home');
 });
+// Route pour le DAF
+Route::middleware(['auth', 'user-access:daf'])->group(function () {
+    Route::get('/daf',[HomeController::class,'dafHome'])->name('daf.home');
+});
 
 Route::middleware('auth')->prefix('departement')->controller(DepartementController::class)->group(function(){
     Route::get('/liste','index')->name('departement.index');
@@ -51,6 +56,7 @@ Route::middleware('auth')->prefix('departement')->controller(DepartementControll
     Route::get('/{id}','show')->name('departement.edit');
     Route::put('/{id}','update')->name('departement.update');
     Route::delete('/{id}','destroy')->name('departement.delete');
+    Route::post('/fonction','getFonction');
 });
 Route::middleware('auth')->prefix('fonction')->controller(FonctionController::class)->group(function(){
     Route::get('/liste','index')->name('fonction.index');
@@ -58,9 +64,14 @@ Route::middleware('auth')->prefix('fonction')->controller(FonctionController::cl
     Route::post('/ajout','store')->name('fonction.store');
     Route::get('/{fonction}','show')->name('fonction.edit');
     Route::put('/{fonction}','update')->name('fonction.update');
+    Route::delete('/{fonction}','destroy')->name('fonction.delete');
 });
-// Route pour le DAF
-Route::middleware(['auth', 'user-access:daf'])->group(function () {
-    Route::get('/daf',[HomeController::class,'dafHome'])->name('daf.home');
+Route::middleware('auth')->prefix('employer')->controller(EmployeController::class)->group(function(){
+    Route::get('/liste','index')->name('employer.index');
+    Route::get('/ajout','create')->name('employer.ajout');
+    Route::post('/ajout','store')->name('employer.store');
+    Route::get('/{id}','show')->name('employer.edit');
+    Route::put('/{employer}','update')->name('employer.update');
+    Route::delete('/{id}','destroy')->name('employer.delete');
 });
 // Route::get('/home', [HomeController::class, 'index'])->name('home');

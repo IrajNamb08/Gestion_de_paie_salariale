@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -25,7 +27,7 @@ class UserRequest extends FormRequest
     {
         return [
             'nom' => 'required|string|max:255',
-            'email' => 'required|email',
+            'email' => ['required',Rule::unique('users')->ignore($this->id)],
             'password' => 'required',
             'role' => 'required|integer'
         ];

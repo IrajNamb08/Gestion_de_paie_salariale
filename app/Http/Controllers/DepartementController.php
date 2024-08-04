@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fonction;
 use App\Models\Departement;
 use Illuminate\Http\Request;
 use App\Http\Requests\DepartementRequest;
@@ -61,5 +62,11 @@ class DepartementController extends Controller
         $departement = Departement::findOrFail($id);
         $departement->delete();
         return redirect()->route('departement.index')->with('success','Département supprimer');
+    }
+
+    public function getFonction(Request $request)
+    {
+        $data['fonctions'] = Fonction::where('departement_id',$request->departement_id)->get(['fonction','id']);
+        return response()->json($data);
     }
 }

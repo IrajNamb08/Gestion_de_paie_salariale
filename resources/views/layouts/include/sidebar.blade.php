@@ -22,7 +22,7 @@
                     </li>
                 @endif
                 <li>
-                    <a href="#">
+                    <a href="{{route('employer.index')}}">
                         <i class="fas fa-user"></i>Employé
                     </a>
                 </li>
