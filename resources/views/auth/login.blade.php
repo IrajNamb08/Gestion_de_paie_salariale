@@ -1,14 +1,14 @@
 @extends('layouts.connexion')
 
 @section('content')
-@php
+{{-- @php
     use App\Models\User;
 
     $users = User::all()->count();
     if($users < 3){
         dd($users);
     }
-@endphp
+@endphp --}}
 <div class="page-content--bge5">
     <div class="container">
         <div class="login-wrap">

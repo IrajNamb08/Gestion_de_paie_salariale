@@ -30,7 +30,7 @@ class EmployerRequest extends FormRequest
             'profil'=> 'nullable|mimes:jpeg,png,jpg,gif,svg,webp',
             'cin' => 'required|integer',
             'numCnaps' => 'required|integer',
-            'salaire' => 'required|integer',
+            'salaire' => 'required|decimal:1,20',
             'dateEmbauche' => 'required|date',
         ];
     }

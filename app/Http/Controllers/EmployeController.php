@@ -74,9 +74,33 @@ class EmployeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EmployerRequest $request, $id)
     {
-        //
+        $employer = Employer::findOrFail($id);
+        $employer = new Employer();
+        $employer->nom = $request->nom;
+        $employer->prenom = $request->prenom;
+        $employer->adresse = $request->adresse;
+        $employer->telephone = $request->telephone;
+        $employer->sexe = $request->sexe;
+        $employer->cin = $request->cin;
+        $employer->numCnaps = $request->numCnaps;
+        $employer->salaire = $request->salaire;
+        $employer->departement_id = $request->departement_id;
+        $employer->fonction_id = $request->fonction_id;
+
+        if($request->hasFile('profil')){
+            if($employer->profil){
+                Storage::disk('public')->delete('Employer/' . $employer->profil);
+            }
+            $profil = $request->file('profil');
+            $imageName = $request->nom.Str::slug($request->profil). '.' . $profil->getClientOriginalExtension();
+            $path = $profil->storeAs('Employer',$imageName,'public');
+            $employer->profil = $imageName;
+        }
+        $employer->dateEmbauche = $request->dateEmbauche;
+        $employer->save();
+        return redirect()->route('employer.index')->with('success','Employé mis à jour');
     }
 
     /**
@@ -91,5 +115,11 @@ class EmployeController extends Controller
         }
         $employer->delete();
         return redirect()->route('employer.index')->with('delete','Employé supprimé');
+    }
+
+    public function getBulletins($id)
+    {
+        $employer = Employer::with('bulletinPaies')->findOrFail($id);
+        return view('employé.bulletins', compact('employer'));
     }
 }

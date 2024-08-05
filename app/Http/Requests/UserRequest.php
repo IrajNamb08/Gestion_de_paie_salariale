@@ -25,12 +25,21 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules =  [
             'nom' => 'required|string|max:255',
             'email' => ['required',Rule::unique('users')->ignore($this->id)],
-            'password' => 'required',
+            // 'password' => 'required',
             'role' => 'required|integer'
         ];
+        if ($this->isMethod('post')) {
+            // Lors de la création d'un utilisateur
+            $rules['password'] = 'required|confirmed';
+        } elseif ($this->isMethod('put')) {
+            // Lors de la mise à jour d'un utilisateur
+            $rules['password'] = 'nullable|confirmed';
+        }
+
+        return $rules;
     }
     public function messages()
     { 

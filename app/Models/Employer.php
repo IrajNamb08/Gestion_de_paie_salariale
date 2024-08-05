@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Fonction;
 use App\Models\Departement;
+use App\Models\BulletinPaie;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,8 +25,8 @@ class Employer extends Model
         return $this->belongsTo(Fonction::class);
     }
 
-    public function getProfileImagePathAttribute()
+    public function bulletinPaies()
     {
-        return $this->profil ? asset('storage/app/public/Employer/' . $this->profil) : null;
+        return $this->hasMany(BulletinPaie::class);
     }
 }

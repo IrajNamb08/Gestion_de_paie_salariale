@@ -59,7 +59,9 @@ class UserController extends Controller
         $user->nom = $request->nom;
         $user->nom = $request->nom;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        if(!empty($request->password)){
+            $user->password = Hash::make($request->password);
+        }
         $user->role = $request->role;
         $user->save();
         return redirect()->route('drh.liste')->with('success','Utilisateur mis à jour avec succèss');

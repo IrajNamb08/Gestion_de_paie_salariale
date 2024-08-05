@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">Mot de Passe</div>
-                            <input type="password" id="password" name="password" value="{{old('password', $user->password)}}" class="form-control">
+                            <input type="password" id="password" name="password" class="form-control">
                             <div class="input-group-addon">
                                 <i class="fa fa-asterisk"></i>
                             </div>
@@ -51,13 +51,13 @@
                         <div class="col col-md-9">
                             <div class="form-check-inline form-check">
                                 <label for="inline-radio1" class="form-check-label ">
-                                    <input type="radio" name="role" value="1" {{$user->role == 1 ? 'checked' : ''}} class="form-check-input">RH
+                                    <input type="radio" name="role" value="1" {{ $user->role == 'rh' ? 'checked' : '' }} class="form-check-input">RH
                                 </label>
                                 <label for="inline-radio2" class="form-check-label ">
-                                    <input type="radio" name="role" value="2" {{$user->role == 2 ? 'checked' : ''}} class="form-check-input">DG
+                                    <input type="radio" name="role" value="2" {{ $user->role== 'dg' ? 'checked' : '' }} class="form-check-input">DG
                                 </label>
                                 <label for="inline-radio3" class="form-check-label ">
-                                    <input type="radio"  name="role" value="3" {{$user->role == 3 ? 'checked' : ''}} class="form-check-input">DAF
+                                    <input type="radio"  name="role" value="3" {{ $user->role== 'daf' ? 'checked' : '' }} class="form-check-input">DAF
                                 </label>
                             </div>
                         </div>

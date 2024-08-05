@@ -25,7 +25,7 @@
             </div>
         @endif
         <div class="table-responsive table-data">
-            <table class="table">
+            <table class="table" style="table-layout: fixed;">
                 <thead>
                     <tr>
                         <td></td>
@@ -79,6 +79,10 @@
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Modifier">
                                             <a href="{{route('employer.edit',$employer->id)}}">
                                             <i class="zmdi zmdi-edit"></i></a>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Bulletin de paie">
+                                            <a href="{{route('employer.bulletin',$employer->id)}}">
+                                            <i class="zmdi zmdi-download"></i></a>
                                         </button>
                                         <form action="{{route('employer.delete',$employer->id)}}" method="POST">
                                             @csrf

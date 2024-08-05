@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\BulletinPaieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,5 +74,15 @@ Route::middleware('auth')->prefix('employer')->controller(EmployeController::cla
     Route::get('/{id}','show')->name('employer.edit');
     Route::put('/{employer}','update')->name('employer.update');
     Route::delete('/{id}','destroy')->name('employer.delete');
+    Route::get('/{id}/bulletin_de_paie','getBulletins')->name('employer.bulletin');
+});
+Route::middleware('auth')->prefix('bulletin')->controller(BulletinPaieController::class)->group(function(){
+    // Route::get('/{employer}','index')->name('bulletin.index');
+    Route::get('/ajout/{id}','create')->name('bulletin.ajout');
+    Route::post('/ajout/{id}','store')->name('bulletin.store');
+    Route::get('/download/{id}','download')->name('bulletin.download');
+    // Route::get('/{id}','show')->name('employer.edit');
+    // Route::put('/{employer}','update')->name('employer.update');
+    // Route::delete('/{id}','destroy')->name('employer.delete');
 });
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
