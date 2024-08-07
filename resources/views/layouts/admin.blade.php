@@ -34,7 +34,150 @@
 
     <!-- Main CSS-->
     <link href="{{asset('css/theme.css')}}" rel="stylesheet" media="all">
-
+    <style>
+        .container{
+            margin-top: 0 !important;
+        }
+        .table-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .table thead th {
+            border-bottom: none;
+        }
+        .table tbody tr {
+            border-bottom: 1px solid #dee2e6;
+            border-radius: 15px;
+        }
+        .table tbody td {
+            vertical-align: middle;
+        }
+        .table tbody tr:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            background-color: #6f42c1;
+        }
+        .category span {
+            display: inline-block;
+            margin-right: 5px;
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .category span.arts {
+            background-color: #ffc107;
+            color: #fff;
+        }
+        .category span.books {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+        .category span.travel {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .category span.computers {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .category span.kitchen {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .category span.furniture {
+            background-color: #6f42c1;
+            color: #fff;
+        }
+        .category span.beauty {
+            background-color: #fd7e14;
+            color: #fff;
+        }
+        .category span.apparel {
+            background-color: #20c997;
+            color: #fff;
+        }
+        .category span.sale {
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .actions i {
+            color: #6c757d;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .actions i:hover {
+            color: #495057;
+        }
+        .form-container {
+            justify-content: center;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
+        }
+        .form-container h3 {
+            font-weight: bold;
+            color: #343a40;
+        }
+        .form-container p {
+            color: #dc3545;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            background-color: #f1f3f5;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+            border-color: #80bdff;
+        }
+        .btn-submit {
+            background: linear-gradient(to right, #f72585, #b5179e);
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .btn-submit:hover {
+            background: linear-gradient(to right, #b5179e, #7209b7);
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #343a40;
+        }
+        .custom-radio {
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .custom-radio input[type="radio"] {
+            display: none;
+        }
+        .custom-radio span {
+            padding: 10px 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            color: #6c757d;
+            font-weight: bold;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+        .custom-radio input[type="radio"]:checked + span {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+    </style>
 </head>
 
 <body class="animsition">
@@ -66,7 +209,7 @@
         </div>
 
     </div>
-
+    
     <!-- Jquery JS-->
     <script src="{{asset('vendor/jquery-3.2.1.min.js')}}"></script>
     <!-- Bootstrap JS-->
@@ -92,26 +235,6 @@
     <script src="{{asset('js/main.js')}}"></script>
 
     <script>
-        // $(document).ready(function(){
-        //     $('#departement_id').change(function(event){
-        //         var idDepartement = this.value;
-        //         // alert(idDepartement);
-        //         $('#fonction_id').html('');
-
-        //         $.ajax({
-        //             url:'/departement/fonction',
-        //             type : 'POST',
-        //             dataType : 'json',
-        //             data : {departement_id: idDepartement,_token:"{{ csrf_token() }}"},
-        //             success : function(response){
-        //                 $('#fonction_id').html('<option value="">--Fonction--</option>');
-        //                 $.each(response.fonctions,function(index, val){
-        //                     $('#fonction_id').append('<option value="'+val.id+'"> '+val.fonction+'</option>');
-        //                 });
-        //             }
-        //         });
-        //     });
-        // });
             $(document).ready(function(){
             // Charger les fonctions lorsque la page est chargée si un département est déjà sélectionné
             var initialDepartementId = $('#departement_id').val();
@@ -145,7 +268,6 @@
             }
         });
     </script>
-
 </body>
 
 </html>

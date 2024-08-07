@@ -58,6 +58,9 @@ Route::middleware('auth')->prefix('departement')->controller(DepartementControll
     Route::put('/{id}','update')->name('departement.update');
     Route::delete('/{id}','destroy')->name('departement.delete');
     Route::post('/fonction','getFonction');
+    Route::middleware('auth')->prefix('user')->controller(HomeController::class)->group(function(){
+        Route::get('/{id}','show')->name('user.show');
+    });
 });
 Route::middleware('auth')->prefix('fonction')->controller(FonctionController::class)->group(function(){
     Route::get('/liste','index')->name('fonction.index');
@@ -72,7 +75,7 @@ Route::middleware('auth')->prefix('employer')->controller(EmployeController::cla
     Route::get('/ajout','create')->name('employer.ajout');
     Route::post('/ajout','store')->name('employer.store');
     Route::get('/{id}','show')->name('employer.edit');
-    Route::put('/{employer}','update')->name('employer.update');
+    Route::put('/{id}','update')->name('employer.update');
     Route::delete('/{id}','destroy')->name('employer.delete');
     Route::get('/{id}/bulletin_de_paie','getBulletins')->name('employer.bulletin');
 });
@@ -84,5 +87,8 @@ Route::middleware('auth')->prefix('bulletin')->controller(BulletinPaieController
     // Route::get('/{id}','show')->name('employer.edit');
     // Route::put('/{employer}','update')->name('employer.update');
     // Route::delete('/{id}','destroy')->name('employer.delete');
+});
+Route::middleware('auth')->prefix('user')->controller(HomeController::class)->group(function(){
+    Route::get('/{id}','show')->name('user.show');
 });
 // Route::get('/home', [HomeController::class, 'index'])->name('home');

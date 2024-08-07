@@ -77,7 +77,6 @@ class EmployeController extends Controller
     public function update(EmployerRequest $request, $id)
     {
         $employer = Employer::findOrFail($id);
-        $employer = new Employer();
         $employer->nom = $request->nom;
         $employer->prenom = $request->prenom;
         $employer->adresse = $request->adresse;
@@ -88,7 +87,7 @@ class EmployeController extends Controller
         $employer->salaire = $request->salaire;
         $employer->departement_id = $request->departement_id;
         $employer->fonction_id = $request->fonction_id;
-
+        $employer->dateEmbauche = $request->dateEmbauche;
         if($request->hasFile('profil')){
             if($employer->profil){
                 Storage::disk('public')->delete('Employer/' . $employer->profil);
@@ -98,7 +97,6 @@ class EmployeController extends Controller
             $path = $profil->storeAs('Employer',$imageName,'public');
             $employer->profil = $imageName;
         }
-        $employer->dateEmbauche = $request->dateEmbauche;
         $employer->save();
         return redirect()->route('employer.index')->with('success','Employé mis à jour');
     }
