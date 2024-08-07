@@ -3,7 +3,7 @@
 @section('content')
     <div class="user-data m-b-30">
         <h3 class="title-3 m-b-30">
-            <i class="zmdi zmdi-account-calendar"></i>Liste des Fonctions
+            <i class="fas fa-briefcase"></i>Liste des Fonctions
         </h3>
         @if (session('success'))
             <div class="alert alert-success">

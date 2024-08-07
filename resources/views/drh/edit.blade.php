@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">Modifier un utilisateur</div>
-            @if ($errors->any())
+    <div class="form-container">
+        <p><i class="fas fa-sign-in-alt"></i></p>
+        <h3 class="py-1">Nouveau Accès</h3>
+        @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -12,61 +12,45 @@
                     </ul>
                 </div>
             @endif
-            <div class="card-body card-block">
-                <form action="{{route('drh.update', $user->id)}}" method="POST" autocomplete="off">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">Nom de l'utilisateur</div>
-                            <input type="text" id="nom" name="nom" class="form-control" value="{{old('nom', $user->nom)}}" required>
-                            <div class="input-group-addon">
-                                <i class="fa fa-user"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">Email</div>
-                            <input type="email" id="email" name="email" class="form-control" value="{{old('email', $user->email)}}" required>
-                            <div class="input-group-addon">
-                                <i class="fa fa-envelope"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">Mot de Passe</div>
-                            <input type="password" id="password" name="password" class="form-control">
-                            <div class="input-group-addon">
-                                <i class="fa fa-asterisk"></i>
-                            </div>
-                        </div>
-                        <small>Laissez vide pour conserver le mot de passe actuel.</small>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label class=" form-control-label">Choisissez son rôle</label>
-                        </div>
-                        <div class="col col-md-9">
-                            <div class="form-check-inline form-check">
-                                <label for="inline-radio1" class="form-check-label ">
-                                    <input type="radio" name="role" value="1" {{ $user->role == 'rh' ? 'checked' : '' }} class="form-check-input">RH
-                                </label>
-                                <label for="inline-radio2" class="form-check-label ">
-                                    <input type="radio" name="role" value="2" {{ $user->role== 'dg' ? 'checked' : '' }} class="form-check-input">DG
-                                </label>
-                                <label for="inline-radio3" class="form-check-label ">
-                                    <input type="radio"  name="role" value="3" {{ $user->role== 'daf' ? 'checked' : '' }} class="form-check-input">DAF
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-actions form-group">
-                        <button type="submit" class="btn btn-success btn-sm">Mettre à jour</button>
-                    </div>
-                </form>
+        <hr>
+        <form action="{{route('drh.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nom">Nom d'utilisateur</label>
+                    <input type="text" value="{{old('nom', $user->nom)}}" class="form-control" name="nom" id="nom">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" value="{{old('email', $user->email)}}" class="form-control" name="email" id="email">
+                </div>
             </div>
-        </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" name="password" id="password">
+                    <small>Laissez vide pour conserver le mot de passe actuel.</small>
+                </div>
+                <div class="form-group col-md-6 text-uppercase">
+                    <label>Rôle</label><br>
+                    <label class="custom-radio">
+                        <input type="radio" {{ $user->role == 'rh' ? 'checked' : '' }} id="rh" name="role" value="1">
+                        <span>rh</span>
+                    </label>
+                    <label class="custom-radio">
+                        <input type="radio" {{ $user->role== 'dg' ? 'checked' : '' }} id="dg" name="role" value="2">
+                        <span>dg</span>
+                    </label>
+                    <label class="custom-radio">
+                        <input type="radio" id="daf" {{ $user->role== 'daf' ? 'checked' : '' }} name="role" value="3" >
+                        <span>daf</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <button type="submit" class="btn-submit">Mettre à jour <i class="far fa-edit"></i></button>
+            </div>
+        </form>
     </div>
 @endsection

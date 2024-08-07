@@ -33,10 +33,10 @@ class UserRequest extends FormRequest
         ];
         if ($this->isMethod('post')) {
             // Lors de la création d'un utilisateur
-            $rules['password'] = 'required|confirmed';
+            $rules['password'] = 'required';
         } elseif ($this->isMethod('put')) {
             // Lors de la mise à jour d'un utilisateur
-            $rules['password'] = 'nullable|confirmed';
+            $rules['password'] = 'nullable';
         }
 
         return $rules;

@@ -45,9 +45,19 @@ class HomeController extends Controller
     {
         return view('dafHome');
     }
-    public function show($id)
+    public function accueil()
     {
-        $user = User::findOrFail($id);
-        dd($user);
+        $user = Auth::user();
+
+        if ($user->role == 'rh') {
+            return redirect()->route('rh.home');
+        } elseif ($user->role == 'dg') {
+            return redirect()->route('dg.home');
+        } elseif ($user->role == 'daf') {
+            return redirect()->route('daf.home');
+        } else {
+            // Par défaut, rediriger vers l'accueil de l'utilisateur
+            return redirect()->route('home');
+        }
     }
 }

@@ -38,7 +38,7 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->save();
 
-        return redirect()->route('drh.ajout')->with('success','Utilisateur enregistré voir dans la liste des utilisateurs');
+        return redirect()->route('drh.liste')->with('success','Utilisateur enregistré voir dans la liste des utilisateurs');
     }
 
     /**

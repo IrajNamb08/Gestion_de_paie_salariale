@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Auth::routes();
-
+Route::get('/accueil',[HomeController::class,'accueil'])->name('accueil');
 // Route pour le DRH
 Route::middleware(['auth', 'user-access:drh'])->group(function () {
     Route::get('/',[HomeController::class,'index'])->name('home');
@@ -58,9 +58,7 @@ Route::middleware('auth')->prefix('departement')->controller(DepartementControll
     Route::put('/{id}','update')->name('departement.update');
     Route::delete('/{id}','destroy')->name('departement.delete');
     Route::post('/fonction','getFonction');
-    Route::middleware('auth')->prefix('user')->controller(HomeController::class)->group(function(){
-        Route::get('/{id}','show')->name('user.show');
-    });
+    
 });
 Route::middleware('auth')->prefix('fonction')->controller(FonctionController::class)->group(function(){
     Route::get('/liste','index')->name('fonction.index');
