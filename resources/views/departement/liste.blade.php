@@ -62,5 +62,8 @@
                 </tbody>
             </table>
         </div>
+        <div class="d-flex py-3 justify-content-center">
+            {{ $departements->links() }}
+        </div>
     </div>
 @endsection

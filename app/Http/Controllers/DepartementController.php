@@ -14,7 +14,7 @@ class DepartementController extends Controller
      */
     public function index()
     {
-        $departements = Departement::all();
+        $departements = Departement::paginate(4);
         return view('departement.liste',compact('departements'));
     }
 

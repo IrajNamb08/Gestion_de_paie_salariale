@@ -14,7 +14,7 @@ class FonctionController extends Controller
      */
     public function index()
     {
-        $fonctions = Fonction::with('departement')->get();
+        $fonctions = Fonction::with('departement')->paginate(4);
         return view('fonction.liste',compact('fonctions'));
     }
 

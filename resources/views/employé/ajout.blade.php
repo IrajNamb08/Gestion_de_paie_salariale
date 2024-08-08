@@ -59,7 +59,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email">
+                    <input type="email" name="email" class="form-control" id="email">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="profil">Image de profil</label>
@@ -106,15 +106,11 @@
                     </select>
                 </div>
             </div>
-            <div class="form-row align-items-center">
-                <div class="form-group col-md-4">
-                    <label for="matricule">Matricule</label>
-                    <input type="text" class="form-control" name="matricule" id="matricule" disabled>
-                </div>
-                <div class="form-group col-md-6 text-right">
-                    <button type="submit" class="btn-submit">Enregistrer <i class="far fa-plus-square"></i></button>
-                </div>
+ 
+            <div class="form-group text-right">
+                <button type="submit" class="btn-submit">Enregistrer <i class="far fa-plus-square"></i></button>
             </div>
+            
         </form>
     </div>
 @endsection

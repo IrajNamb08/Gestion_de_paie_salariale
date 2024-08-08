@@ -60,7 +60,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email">
+                    <input type="email" value="{{old('email', $employer->email)}}"  name="email" class="form-control" id="email">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="profil">Image de profil</label>
@@ -83,11 +83,11 @@
                 <div class="form-group col-md-6">
                     <label>Type Contrat</label><br>
                     <label class="custom-radio">
-                        <input type="radio" name="contrat" value="cdd">
+                        <input type="radio" name="contrat" {{ $employer->contrat == 'cdd' ? 'checked' : '' }} value="cdd">
                         <span>CDD</span>
                     </label>
                     <label class="custom-radio">
-                        <input type="radio" name="contrat" value="cdi"">
+                        <input type="radio" name="contrat"  {{ $employer->contrat == 'cdi' ? 'checked' : '' }} value="cdi"">
                         <span>CDI</span>
                     </label>
                 </div>
@@ -111,7 +111,7 @@
             <div class="form-row align-items-center">
                 <div class="form-group col-md-4">
                     <label for="matricule">Matricule</label>
-                    <input type="text" class="form-control" name="matricule" id="matricule" disabled>
+                    <input type="text" class="form-control" value="{{old('matricule', $employer->matricule)}}" name="matricule" id="matricule" disabled>
                 </div>
                 <div class="form-group col-md-6 text-right">
                     <button type="submit" class="btn-submit">Mettre à jour <i class="fas fa-user-edit"></i></button>

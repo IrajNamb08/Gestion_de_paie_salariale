@@ -15,12 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('departement_id');
             $table->unsignedBigInteger('fonction_id');
+            $table->string('matricule');
             $table->string('nom');
             $table->string('prenom');
             $table->string('adresse');
             $table->string('telephone');
             $table->string('profil');
             $table->string('sexe');
+            $table->string('contrat');
+            $table->string('email');
             $table->bigInteger('cin');
             $table->bigInteger('numCnaps');
             $table->decimal('salaire',30,2);

@@ -177,6 +177,7 @@
             color: #fff;
             border-color: #007bff;
         }
+        
     </style>
 </head>
 
@@ -268,6 +269,7 @@
             }
         });
     </script>
+    @yield('scripts')
 </body>
 
 </html>

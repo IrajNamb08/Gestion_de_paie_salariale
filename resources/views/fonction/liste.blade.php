@@ -65,6 +65,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex py-3 justify-content-center">
+                {{ $fonctions->links() }}
+            </div>
         </div>
     </div>
 @endsection

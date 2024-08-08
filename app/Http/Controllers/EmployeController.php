@@ -7,6 +7,7 @@ use App\Models\Fonction;
 use App\Models\Departement;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Requests\EmployerRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,10 +17,16 @@ class EmployeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+        
+    //     $employers = Employer::with('departement','fonction')->get();
+    //     return view('employé.liste',compact('employers'));
+    // }
+    public function index(Request $request)
     {
-        $employers = Employer::with('departement','fonction')->get();
-        return view('employé.liste',compact('employers'));
+        $employers = Employer::paginate(8); // Affichez 8 employeurs par page
+        return view('employé.liste', compact('employers'));
     }
 
     /**
@@ -36,17 +43,32 @@ class EmployeController extends Controller
      */
     public function store(EmployerRequest $request)
     {
+        
         $employer = new Employer();
         $employer->nom = $request->nom;
         $employer->prenom = $request->prenom;
         $employer->adresse = $request->adresse;
         $employer->telephone = $request->telephone;
         $employer->sexe = $request->sexe;
+        $employer->contrat = $request->contrat;
+        $employer->email = $request->email;
         $employer->cin = $request->cin;
         $employer->numCnaps = $request->numCnaps;
         $employer->salaire = $request->salaire;
         $employer->departement_id = $request->departement_id;
         $employer->fonction_id = $request->fonction_id;
+
+        $departement = Departement::find($request->departement_id);
+        $departementCode = strtoupper(substr($departement->departement, 0, 2));
+        $randomCode = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
+        $cinCode = substr($request->cin, -2);
+        $matricule = $departementCode . $cinCode . $randomCode;
+
+        // Vérifier l'unicité de la matricule
+        while (Employer::where('matricule', $matricule)->exists()) {
+            $randomCode = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
+            $matricule = $departementCode . $cinCode . $randomCode;
+        }
 
         if($request->has('profil')){
             $profil = $request->file('profil');
@@ -54,6 +76,7 @@ class EmployeController extends Controller
             $path = $profil->storeAs('Employer',$imageName,'public');
             $employer->profil = $imageName;
         }
+        $employer->matricule = $matricule;
         $employer->dateEmbauche = $request->dateEmbauche;
 
         $employer->save();
@@ -78,6 +101,8 @@ class EmployeController extends Controller
     {
         $employer = Employer::findOrFail($id);
         $employer->nom = $request->nom;
+        $employer->email = $request->email;
+        $employer->contrat = $request->contrat;
         $employer->prenom = $request->prenom;
         $employer->adresse = $request->adresse;
         $employer->telephone = $request->telephone;
@@ -118,6 +143,11 @@ class EmployeController extends Controller
     public function getBulletins($id)
     {
         $employer = Employer::with('bulletinPaies')->findOrFail($id);
+        // Formater les dates des bulletins de paie
+        foreach ($employer->bulletinPaies as $bulletin) {
+            $bulletin->mois = ucfirst(Carbon::parse($bulletin->mois)->locale('fr_FR')->isoFormat('MMMM YYYY'));
+        }
+    
         return view('employé.bulletins', compact('employer'));
     }
 }
