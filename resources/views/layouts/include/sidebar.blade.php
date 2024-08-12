@@ -26,12 +26,12 @@
                 </li>
                 <li class="{{Route::is('departement.index') ? 'active' : ''}}">
                     <a href="{{route('departement.index')}}">
-                        <i class="fas fa-box"></i>Département
+                        <i class="far fa-building"></i>Département
                     </a>
                 </li>
                 <li class="{{Route::is('fonction.index') ? 'active' : ''}}">
                     <a href="{{route('fonction.index')}}">
-                        <i class="far fa-check-square"></i>Fonction
+                        <i class="fas fa-briefcase"></i>Fonction
                     </a>
                 </li>
             </ul>

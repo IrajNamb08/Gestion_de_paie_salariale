@@ -32,25 +32,70 @@ class HomeController extends Controller
         $departement = Departement::all()->count();
         $fonctionCount = Fonction::all()->count();
         $totalSalaires = Employer::sum('salaire');
-        return view('home',compact('employer','departement','fonctionCount','totalSalaires'));
+        $totalCDI = Employer::where('contrat', 'CDI')->count();
+        $totalCDD = Employer::where('contrat', 'CDD')->count();
+        $topSalaries = Employer::with('fonction')
+        ->orderBy('salaire', 'desc') 
+        ->take(5)
+        ->get();
+
+        $percentCDI = $employer ? ($totalCDI / $employer) * 100 : 0;
+        $percentCDD = $employer ? ($totalCDD / $employer) * 100 : 0;
+        return view('home',compact('employer','departement','fonctionCount','totalSalaires','percentCDI', 'percentCDD','topSalaries'));
     }
     
     public function rhHome()
     {
-        $count = User::all()->count();
-        return view('rhHome',compact('count'));
+        $employer = Employer::all()->count();
+        $departement = Departement::all()->count();
+        $fonctionCount = Fonction::all()->count();
+        $totalSalaires = Employer::sum('salaire');
+        $totalCDI = Employer::where('contrat', 'CDI')->count();
+        $totalCDD = Employer::where('contrat', 'CDD')->count();
+        $topSalaries = Employer::with('fonction')
+        ->orderBy('salaire', 'desc') 
+        ->take(5)
+        ->get();
+
+        $percentCDI = $employer ? ($totalCDI / $employer) * 100 : 0;
+        $percentCDD = $employer ? ($totalCDD / $employer) * 100 : 0;
+        return view('rhHome',compact('employer','departement','fonctionCount','totalSalaires','percentCDI', 'percentCDD','topSalaries'));
     }
 
     public function dgHome()
     {
-        $count = User::all()->count();
-        return view('dgHome',compact('count'));
+        $employer = Employer::all()->count();
+        $departement = Departement::all()->count();
+        $fonctionCount = Fonction::all()->count();
+        $totalSalaires = Employer::sum('salaire');
+        $totalCDI = Employer::where('contrat', 'CDI')->count();
+        $totalCDD = Employer::where('contrat', 'CDD')->count();
+        $topSalaries = Employer::with('fonction')
+        ->orderBy('salaire', 'desc') 
+        ->take(5)
+        ->get();
+
+        $percentCDI = $employer ? ($totalCDI / $employer) * 100 : 0;
+        $percentCDD = $employer ? ($totalCDD / $employer) * 100 : 0;
+        return view('dgHome',compact('employer','departement','fonctionCount','totalSalaires','percentCDI', 'percentCDD','topSalaries'));
     }
 
     public function dafHome()
     {
-        $count = User::all()->count();
-        return view('dafHome',compact('count'));
+        $employer = Employer::all()->count();
+        $departement = Departement::all()->count();
+        $fonctionCount = Fonction::all()->count();
+        $totalSalaires = Employer::sum('salaire');
+        $totalCDI = Employer::where('contrat', 'CDI')->count();
+        $totalCDD = Employer::where('contrat', 'CDD')->count();
+        $topSalaries = Employer::with('fonction')
+        ->orderBy('salaire', 'desc') 
+        ->take(5)
+        ->get();
+
+        $percentCDI = $employer ? ($totalCDI / $employer) * 100 : 0;
+        $percentCDD = $employer ? ($totalCDD / $employer) * 100 : 0;
+        return view('dafHome',compact('employer','departement','fonctionCount','totalSalaires','percentCDI', 'percentCDD','topSalaries'));
     }
     public function accueil()
     {

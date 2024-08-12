@@ -17,12 +17,7 @@ class EmployeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-        
-    //     $employers = Employer::with('departement','fonction')->get();
-    //     return view('employer.liste',compact('employers'));
-    // }
+  
     public function index(Request $request)
     {
         $query = Employer::query();

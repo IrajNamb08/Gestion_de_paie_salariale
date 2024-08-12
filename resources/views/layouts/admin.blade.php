@@ -179,6 +179,33 @@
         }
         
     </style>
+    <style>
+        .overview-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* S'assure que l'élément prend toute la hauteur du parent */
+        }
+
+        .overview-box {
+            flex-grow: 1; /* Permet à l'élément de grandir pour remplir l'espace disponible */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .overview-item .text h2 {
+            font-size: 24px; /* Ajustez cette valeur en fonction de vos besoins */
+            word-wrap: break-word;
+        }
+
+        .overview__inner {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+    </style>
 </head>
 
 <body class="animsition">
@@ -271,6 +298,44 @@
             }
         });
     </script>
+    <script>
+        var ctx = document.getElementById("percent-chart").getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["CDI", "CDD"],
+                datasets: [{
+                    label: "Répartition des contrats",
+                    data: [{{ $percentCDI ?? 0 }}, {{ $percentCDD ?? 0 }}],
+                    backgroundColor: ['#3498db', '#e74c3c'],
+                    hoverBackgroundColor: ['#2980b9', '#c0392b'],
+                    borderWidth: [1, 1]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 70,
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var total = dataset.data.reduce(function(previousValue, currentValue) {
+                                return previousValue + currentValue;
+                            });
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = Math.floor(((currentValue/total) * 100)+0.5);
+                            return percentage + "%";
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    
     @yield('scripts')
 </body>
 
