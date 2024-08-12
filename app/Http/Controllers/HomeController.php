@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Employer;
+use App\Models\Fonction;
+use App\Models\Departement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,25 +28,29 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return view('home',compact('user'));
+        $employer = Employer::all()->count();
+        $departement = Departement::all()->count();
+        $fonctionCount = Fonction::all()->count();
+        $totalSalaires = Employer::sum('salaire');
+        return view('home',compact('employer','departement','fonctionCount','totalSalaires'));
     }
     
     public function rhHome()
     {
-        $user = Auth::user();
-        return view('rhHome',compact('user'));
+        $count = User::all()->count();
+        return view('rhHome',compact('count'));
     }
 
     public function dgHome()
     {
-        $user = Auth::user();
-        return view('dgHome',compact('user'));
+        $count = User::all()->count();
+        return view('dgHome',compact('count'));
     }
 
     public function dafHome()
     {
-        return view('dafHome');
+        $count = User::all()->count();
+        return view('dafHome',compact('count'));
     }
     public function accueil()
     {

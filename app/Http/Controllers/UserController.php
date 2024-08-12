@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -50,9 +51,6 @@ class UserController extends Controller
         return view('drh.edit',compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UserRequest $request, $id)
     {
         $user = User::findOrfail($id);
@@ -75,5 +73,33 @@ class UserController extends Controller
         $user = User::findOrfail($id);
         $user->delete();
         return redirect()->route('drh.liste')->with('delete','Utilisateur supprimé');
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        if(Auth::user()->id !== $user->id){
+            return response()->json("Pas d'accès");
+        }
+        return view('users.profil',compact('user'));
+    }
+
+    public function profilUpdate(UserRequest $request, $id)
+    {
+        $user = User::findOrfail($id);
+        if(Auth::user()->id !== $user->id){
+            return response()->json("Pas d'accès");
+        }
+        $user->nom = $request->nom;
+        $user->nom = $request->nom;
+        $user->email = $request->email;
+        if(!empty($request->password)){
+            $user->password = Hash::make($request->password);
+        }
+        if(!empty($request->role)){
+            $user->role = $request->role;
+        }
+        $user->save();
+        return redirect()->route('user.edit', $user->id)->with('success', 'Profil mis à jour avec succès.');
     }
 }

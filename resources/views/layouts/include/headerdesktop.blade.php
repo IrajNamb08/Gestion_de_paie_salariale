@@ -138,11 +138,11 @@
                                                 <span class="email">{{ Auth::user()->email }}</span>
                                             </div>
                                         </div>
-                                        {{-- <div class="account-dropdown__item">
-                                            <a href="{{route('user.show',$user->id)}}">
-                                                <i class="zmdi zmdi-account"></i>Account
+                                        <div class="account-dropdown__item">
+                                            <a href="{{route('user.edit',Auth::user()->id)}}">
+                                                <i class="zmdi zmdi-account"></i>Mon compte
                                             </a>
-                                        </div> --}}
+                                        </div>
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
                                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();

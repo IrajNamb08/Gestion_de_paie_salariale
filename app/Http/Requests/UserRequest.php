@@ -29,8 +29,15 @@ class UserRequest extends FormRequest
             'nom' => 'required|string|max:255',
             'email' => ['required',Rule::unique('users')->ignore($this->id)],
             // 'password' => 'required',
-            'role' => 'required|integer'
+            // 'role' => 'integer'
         ];
+        if ($this->isMethod('post')) {
+            // Lors de la création d'un utilisateur
+            $rules['role'] = 'required|integer';
+        } elseif ($this->isMethod('put')) {
+            // Lors de la mise à jour d'un utilisateur
+            $rules['role'] = 'nullable|integer';
+        }
         if ($this->isMethod('post')) {
             // Lors de la création d'un utilisateur
             $rules['password'] = 'required';

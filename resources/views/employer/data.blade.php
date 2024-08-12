@@ -27,7 +27,8 @@
                 <form action="{{ route('employer.delete', $employer->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-link p-0 m-0" data-toggle="tooltip" data-placement="top" title="Supprimer">
+                    <button type="submit" class="btn btn-link p-0 m-0" data-toggle="tooltip" data-placement="top" title="Supprimer"
+                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet employé ?');">
                         <i class="fas fa-trash"></i>
                     </button>
                 </form>

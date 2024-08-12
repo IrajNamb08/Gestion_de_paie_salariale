@@ -35,7 +35,10 @@ Route::middleware(['auth', 'user-access:drh'])->group(function () {
     Route::put('/utilisateurs/{id}',[UserController::class,'update'])->name('drh.update');
     Route::delete('/utilisateurs/{id}',[UserController::class,'destroy'])->name('drh.delete');
 });
-
+Route::middleware('auth')->prefix('user')->controller(UserController::class)->group(function(){
+    Route::get('/{id}','edit')->name('user.edit');
+    Route::put('/{id}','profilUpdate')->name('user.update');
+});
 // Route pour le RH
 Route::middleware(['auth', 'user-access:rh'])->group(function () {
     Route::get('/rh',[HomeController::class,'rhHome'])->name('rh.home');
@@ -86,7 +89,5 @@ Route::middleware('auth')->prefix('bulletin')->controller(BulletinPaieController
     // Route::put('/{employer}','update')->name('employer.update');
     // Route::delete('/{id}','destroy')->name('employer.delete');
 });
-Route::middleware('auth')->prefix('user')->controller(HomeController::class)->group(function(){
-    Route::get('/{id}','show')->name('user.show');
-});
+
 // Route::get('/home', [HomeController::class, 'index'])->name('home');

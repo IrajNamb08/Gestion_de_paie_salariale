@@ -21,23 +21,12 @@ class EmployeController extends Controller
     // {
         
     //     $employers = Employer::with('departement','fonction')->get();
-    //     return view('employer.liste',compact('employers'));
+    //     return view('employé.liste',compact('employers'));
     // }
     public function index(Request $request)
     {
-        $query = Employer::query();
-
-        if ($request->filled('departement_id')) {
-            $query->where('departement_id', $request->departement_id);
-        }
-    
-        if ($request->filled('fonction_id')) {
-            $query->where('fonction_id', $request->fonction_id);
-        }
-
-        $departements = Departement::all();
-        $employers = $query->paginate(5); // Affichez 5 employeurs par page
-        return view('employer.liste', compact('employers','departements'));
+        $employers = Employer::paginate(8); // Affichez 8 employeurs par page
+        return view('employé.liste', compact('employers'));
     }
 
     /**
@@ -46,7 +35,7 @@ class EmployeController extends Controller
     public function create()
     {
         $departements = Departement::all();
-        return view('employer.ajout',compact('departements'));
+        return view('employé.ajout',compact('departements'));
     }
 
     /**
@@ -91,7 +80,7 @@ class EmployeController extends Controller
         $employer->dateEmbauche = $request->dateEmbauche;
 
         $employer->save();
-        return redirect()->route('employer.index')->with('success','employer ajouté avec succès');
+        return redirect()->route('employer.index')->with('success','Employé ajouté avec succès');
     }
 
     /**
@@ -102,7 +91,7 @@ class EmployeController extends Controller
         $employer = Employer::findOrFail($id);
         $departements = Departement::all();
         $fonctions = Fonction::all();
-        return view('employer.edit', compact('departements','fonctions','employer'));
+        return view('employé.edit', compact('departements','fonctions','employer'));
     }
 
     /**
@@ -134,7 +123,7 @@ class EmployeController extends Controller
             $employer->profil = $imageName;
         }
         $employer->save();
-        return redirect()->route('employer.index')->with('success','employer mis à jour');
+        return redirect()->route('employer.index')->with('success','Employé mis à jour');
     }
 
     /**
@@ -148,7 +137,7 @@ class EmployeController extends Controller
             Storage::disk('public')->delete('Employer/' . $employer->profil);
         }
         $employer->delete();
-        return redirect()->route('employer.index')->with('delete','employer supprimé');
+        return redirect()->route('employer.index')->with('delete','Employé supprimé');
     }
 
     public function getBulletins($id)
@@ -159,6 +148,6 @@ class EmployeController extends Controller
             $bulletin->mois = ucfirst(Carbon::parse($bulletin->mois)->locale('fr_FR')->isoFormat('MMMM YYYY'));
         }
     
-        return view('employer.bulletins', compact('employer'));
+        return view('employé.bulletins', compact('employer'));
     }
 }

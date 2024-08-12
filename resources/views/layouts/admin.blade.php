@@ -8,7 +8,7 @@
     <meta name="description" content="au theme template">
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
-
+    <link rel="icon" href="{{ asset('vendor/image.png') }}" type="image/x-icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Title Page-->
@@ -213,6 +213,8 @@
     
     <!-- Jquery JS-->
     <script src="{{asset('vendor/jquery-3.2.1.min.js')}}"></script>
+
+    <script src="{{asset('vendor/sweetalert.js')}}"></script>
     <!-- Bootstrap JS-->
     <script src="{{asset('vendor/bootstrap-4.1/popper.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
@@ -239,13 +241,13 @@
             $(document).ready(function(){
             // Charger les fonctions lorsque la page est chargée si un département est déjà sélectionné
             var initialDepartementId = $('#departement_id').val();
-            @if(isset($employer))
+            
+            @if(isset($employer) && is_object($employer))
                 var initialFonctionId = {{ $employer->fonction_id }};
-                if(initialDepartementId) {
+                if (initialDepartementId) {
                     loadFonctions(initialDepartementId, initialFonctionId);
                 }
             @endif
-
             $('#departement_id').change(function(event){
                 var idDepartement = this.value;
                 $('#fonction_id').html('<option value="">--Sélectionnez une fonction--</option>');

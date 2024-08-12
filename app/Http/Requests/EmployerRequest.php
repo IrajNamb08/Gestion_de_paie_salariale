@@ -29,8 +29,8 @@ class EmployerRequest extends FormRequest
             'sexe'=> 'required|string|max:20',
             'profil'=> 'nullable|mimes:jpeg,png,jpg,gif,svg,webp',
             'cin' => 'required|integer',
-            'numCnaps' => 'required|integer',
-            'salaire' => 'required|decimal:1,100000000000',
+            'numCnaps' => 'nullable|integer',
+            'salaire' => 'required|numeric',
             'dateEmbauche' => 'required|date',
         ];
     }
