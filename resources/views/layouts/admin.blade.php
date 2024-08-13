@@ -206,6 +206,31 @@
         }
 
     </style>
+    <style>
+        .active{
+            color: #eef1f7 !important;
+            background: #c71b97;
+            background: linear-gradient(to right, #f72585, #b5179e);
+            border-radius: 5px;
+            width: 75%;
+            padding-left: 10px;
+        }
+        .active > a{
+            color: #eef1f7 !important;
+        }
+        .sidestyle li:hover{
+            color: #eef1f7 !important;
+            background: #c71b97;
+            background: linear-gradient(to right, #f72585, #b5179e);
+            border-radius: 5px;
+            width: 75%;
+            padding-left: 10px;
+            transition: padding-left 0.3s ease-in-out;
+        }
+        .sidestyle li:hover > a{
+            color: #eef1f7 !important;
+        }
+    </style>
 </head>
 
 <body class="animsition">
@@ -332,6 +357,33 @@
                         }
                     }
                 }
+            }
+        });
+    </script>
+    <script>
+            $(document).ready(function() {
+            // Handle search input and select changes
+            $('#search, #departement_id, #fonction_id').on('input change', function() {
+                fetchEmployers();
+            });
+
+            function fetchEmployers() {
+                $.ajax({
+                    url: "{{ route('employer.index') }}",
+                    method: 'GET',
+                    data: {
+                        search: $('#search').val(),
+                        departement_id: $('#departement_id').val(),
+                        fonction_id: $('#fonction_id').val(),
+                    },
+                    success: function(response) {
+                        $('#employer-results').html(response.html);
+                        $('#pagination-links').html(response.pagination);
+                    },
+                    error: function(xhr) {
+                        console.error("Erreur de récupération des données :", xhr.status, xhr.statusText);
+                    }
+                });
             }
         });
     </script>

@@ -15,18 +15,18 @@
             <div class="login-content">
                 <div class="login-logo">
                     <a href="#">
-                        <img src="images/icon/logo.png" alt="CoolAdmin">
+                        <img src="{{asset('vendor/logo.png')}}" alt="index">
                     </a>
                 </div>
                 <div class="login-form">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group">
-                            <label>Email Address</label>
+                            <label>Adresse Email</label>
                             <input id="email" type="email" class="au-input au-input--full @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
+                            <label>Mot de Passe</label>
                             <input id="password" type="password" class="au-input au-input--full @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                         </div>
                         <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Connexion</button>

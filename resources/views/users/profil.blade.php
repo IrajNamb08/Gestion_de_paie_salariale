@@ -37,6 +37,11 @@
                     <input type="password" class="form-control" name="password" id="password">
                     <small>Laissez vide pour conserver le mot de passe actuel.</small>
                 </div>
+                <div class="form-group col-md-4">
+                    <label for="profil">Profil Utilisateur</label>
+                    <input type="file" class="form-control-file" name="usersimage" id="usersimage">
+                    <img src="{{ asset('storage/User/' . $user->usersimage) }}" width="100" alt="">
+                </div>
                 <div class="form-group col-md-2">
                     <label for="role">Privilège</label>
                     <input type="text" class="form-control text-uppercase text-center" value="{{old('role', $user->role)}}" name="role" id="role" disabled>

@@ -29,9 +29,27 @@ class EmployeController extends Controller
         if ($request->filled('fonction_id')) {
             $query->where('fonction_id', $request->fonction_id);
         }
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('nom', 'like', '%' . $request->search . '%')
+                  ->orWhere('prenom', 'like', '%' . $request->search . '%')
+                  ->orWhereHas('departement', function($query) use ($request) {
+                      $query->where('departement', 'like', '%' . $request->search . '%');
+                  })
+                  ->orWhereHas('fonction', function($query) use ($request) {
+                      $query->where('fonction', 'like', '%' . $request->search . '%');
+                  });
+            });
+        }
+        $employers = $query->paginate(5); // Affichez 5 employeurs par page
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('employer.data', compact('employers'))->render(),
+                'pagination' => $employers->links()->render(),
+            ]);
+        }
 
         $departements = Departement::all();
-        $employers = $query->paginate(5); // Affichez 5 employeurs par page
         return view('employer.liste', compact('employers','departements'));
     }
 

@@ -28,8 +28,7 @@ class UserRequest extends FormRequest
         $rules =  [
             'nom' => 'required|string|max:255',
             'email' => ['required',Rule::unique('users')->ignore($this->id)],
-            // 'password' => 'required',
-            // 'role' => 'integer'
+            'usersimage' => 'nullable|mimes:jpeg,png,jpg,gif,svg,webp|max:3000',
         ];
         if ($this->isMethod('post')) {
             // Lors de la création d'un utilisateur
@@ -55,7 +54,10 @@ class UserRequest extends FormRequest
             'email.required' => 'email obligatoire',
             'email.unique' => 'email unique',
             'password.required' => 'Mot de passe obligatoire',
-            'role.required' => 'Role obligatoire'
+            'role.required' => 'Role obligatoire',
+            'role.integer' => 'Role doit être un entier',
+            'usersimage.mimes' => 'Format de l\'image non autorisé',
+            'usersimage.max' => 'Taille de l\'image non autorisé ne doit pas dépasser 3mb',
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
@@ -91,7 +92,6 @@ class UserController extends Controller
             return response()->json("Pas d'accès");
         }
         $user->nom = $request->nom;
-        $user->nom = $request->nom;
         $user->email = $request->email;
         if(!empty($request->password)){
             $user->password = Hash::make($request->password);
@@ -99,7 +99,16 @@ class UserController extends Controller
         if(!empty($request->role)){
             $user->role = $request->role;
         }
+        if($request->hasFile('usersimage')){
+            if($user->usersimage){
+                Storage::disk('public')->delete('User/' . $user->usersimage);
+            }
+            $usersimage = $request->file('usersimage');
+            $imageName = $request->nom.Str::slug($request->usersimage). '.' . $usersimage->getClientOriginalExtension();
+            $path = $usersimage->storeAs('user',$imageName,'public');
+            $user->usersimage = $imageName;
+        }
         $user->save();
-        return redirect()->route('user.edit', $user->id)->with('success', 'Profil mis à jour avec succès.');
+        return redirect()->route('user.edit', $user->id)->with('success', 'Compte mis à jour avec succès.');
     }
 }

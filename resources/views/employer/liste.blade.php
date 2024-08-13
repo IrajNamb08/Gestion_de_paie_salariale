@@ -19,7 +19,7 @@
             @endif
         </div>
         <hr>
-        <form action="{{ route('employer.index') }}" method="get" class="form-row align-items-center">
+        <form action="{{ route('employer.index') }}" method="get" class="form-row align-items-end">
             <div class="form-group col-md-3 mb-2">
                 <label for="departement_id" class="form-control-label">Département</label>
                 <select name="departement_id" id="departement_id" class="form-control">
@@ -34,9 +34,12 @@
                 <select name="fonction_id" id="fonction_id" class="form-control">
                 </select>
             </div>
-            <div class="form-group col-md-2 mb-2 d-flex align-items-end ">
-                <button type="submit" class="btn-submit"><i class="fas fa-search"></i></button>
-                <a class="btn btn-secondary" href="{{ route('employer.index') }}"><i class="fas fa-sync-alt"></i></a>
+            <div class="form-group col-md-2 mb-2 d-flex align-items-strech">
+                <button type="submit" class="btn-submit mr-2"><i class="fas fa-search"></i></button>
+                <a class="btn btn-secondary d-flex justify-content-center align-items-center" style="width: 56px;border-radius :5px;" href="{{ route('employer.index') }}"><i class="fas fa-sync-alt"></i></a>
+            </div>
+            <div class="form-group mb-2 col-md-4">
+                <input type="text" name="search" class="form-control" id="search" placeholder="search.....">
             </div>
         </form>
         <hr>

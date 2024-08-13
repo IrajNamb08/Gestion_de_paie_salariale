@@ -1,7 +1,7 @@
 @foreach ($employers as $employer)
     <tr>
         <td>
-            <img src="{{ asset('storage/Employer/' . $employer->profil) }}" style="height: 50px;width: 50px;border-radius: 50%;object-fit: cover;" alt="{{ $employer->nom }}">
+            <img src="{{ $employer->profil ? asset('storage/Employer/' . $employer->profil) : asset('vendor/users.png') }}" alt="{{ $employer->nom }}" style="height: 50px;width: 50px;border-radius: 50%;object-fit: cover;">
         </td>
         <td>
             {{ $employer->matricule }}

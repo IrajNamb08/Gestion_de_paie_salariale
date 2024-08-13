@@ -7,6 +7,7 @@ use App\Models\Employer;
 use App\Models\BulletinPaie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Http\Requests\BulletinPaieRequest;
 
 class BulletinPaieController extends Controller
 {
@@ -30,7 +31,7 @@ class BulletinPaieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $id)
+    public function store(BulletinPaieRequest $request, $id)
     {
         $employer = Employer::findOrFail($id);
         $bulletin = new BulletinPaie();
@@ -44,7 +45,7 @@ class BulletinPaieController extends Controller
         $bulletin->salaire_net = $bulletin->salaire_brute - $irsa;
 
         $bulletin->save();
-        return redirect()->route('employer.bulletin',$employer->id)->with('success','bulletin okey');
+        return redirect()->route('employer.bulletin',$employer->id)->with('success','Bulletin générer');
     }
     private function calculateIrsa($salaire_brute)
     {
@@ -97,8 +98,11 @@ class BulletinPaieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $employer = Employer::findOrFail($id);
+        $bulletin = BulletinPaie::findOrFail($id);
+        $bulletin->delete();
+        return redirect()->route('employer.bulletin',$employer->id)->with('success','Bulletin supprimé');
     }
 }
