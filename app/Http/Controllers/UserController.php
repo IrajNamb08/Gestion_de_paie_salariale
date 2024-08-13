@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -104,7 +105,7 @@ class UserController extends Controller
                 Storage::disk('public')->delete('User/' . $user->usersimage);
             }
             $usersimage = $request->file('usersimage');
-            $imageName = $request->nom.Str::slug($request->usersimage). '.' . $usersimage->getClientOriginalExtension();
+            $imageName = Str::slug($request->usersimage). '.' . $usersimage->getClientOriginalExtension();
             $path = $usersimage->storeAs('user',$imageName,'public');
             $user->usersimage = $imageName;
         }

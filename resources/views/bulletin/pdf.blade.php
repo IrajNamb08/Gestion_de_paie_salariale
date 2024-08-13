@@ -104,36 +104,36 @@
                     <td>Salaire de base</td>
                     <td></td>
                     <td></td>
-                    <td>{{$bulletin->employer->salaire}}</td>
+                    <td>{{number_format($bulletin->employer->salaire,2)}} Ar</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Salaire brut</td>
                     <td></td>
                     <td></td>
-                    <td>{{$bulletin->employer->salaire}}</td>
+                    <td>{{number_format($bulletin->employer->salaire,2)}} Ar</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>CNAPS</td>
                     <td>0.01</td>
-                    <td>{{$bulletin->employer->salaire}}</td>
+                    <td>{{number_format($bulletin->employer->salaire,2)}} Ar</td>
                     <td></td>
-                    <td>{{ number_format($cnaps, 2) }}</td>
+                    <td>{{ number_format($cnaps, 2) }} Ar</td>
                 </tr>
                 <tr>
                     <td>OSTIE</td>
                     <td>0.01</td>
-                    <td>{{$bulletin->employer->salaire}}</td>
+                    <td>{{number_format($bulletin->employer->salaire,2)}} Ar<</td>
                     <td></td>
-                    <td>{{ number_format($ostie, 2) }}</td>
+                    <td>{{ number_format($ostie, 2) }} Ar</td>
                 </tr>
                 <tr>
                     <td>IRSA</td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>{{ number_format($irsa, 2) }}</td>
+                    <td>{{ number_format($irsa, 2) }} Ar</td>
                 </tr>
                 <tr>
                     <td>Salaire Net</td>
@@ -146,7 +146,7 @@
                     <td>Net à payer</td>
                     <td></td>
                     <td></td>
-                    <td>{{$bulletin->salaire_net}}</td>
+                    <td>{{number_format($bulletin->salaire_net,2)}} Ar</td>
                     <td></td>
                 </tr>
             </tbody>
@@ -161,15 +161,15 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{$bulletin->employer->salaire}}</td>
-                    <td>{{$bulletin->salaire_net}}</td>
-                    <td>{{ number_format($irsa, 2) }}</td>
+                    <td>{{number_format($bulletin->employer->salaire,2)}} Ar<</td>
+                    <td>{{number_format($bulletin->salaire_net,2)}} Ar</td>
+                    <td>{{ number_format($irsa, 2) }} Ar</td>
                 </tr>
             </tbody>
         </table>
         <div class="footer">
             <p>L'employeur :</p>
-            <p>Monsieur Patron<br>Directeur Général</p>
+            <p>Monsieur RANDRIAMANANA Panja<br>Directeur Général</p>
         </div>
     </div>
 </body>
