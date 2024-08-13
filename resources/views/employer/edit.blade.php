@@ -50,7 +50,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="salaire">Salaire Brute</label>
-                    <input type="text" value="{{old('salaire', number_format($employer->salaire,2))}}" class="form-control" id="salaire" name="salaire">
+                    <input type="text" value="{{old('salaire', $employer->salaire)}}" class="form-control" id="salaire" name="salaire">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="yourMessage">Date d'embauche</label>
