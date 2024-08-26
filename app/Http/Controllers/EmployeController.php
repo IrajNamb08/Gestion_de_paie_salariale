@@ -41,7 +41,7 @@ class EmployeController extends Controller
                   });
             });
         }
-        $employers = $query->paginate(5); // Affichez 5 employeurs par page
+        $employers = $query->paginate(5); // Affichez 5 employers par page
         if ($request->ajax()) {
             return response()->json([
                 'html' => view('employer.data', compact('employers'))->render(),

@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('adresse');
             $table->string('telephone');
-            $table->string('profil');
+            $table->string('profil')->nullable();
             $table->string('sexe');
             $table->string('contrat');
             $table->string('email');
             $table->bigInteger('cin');
-            $table->bigInteger('numCnaps');
+            $table->bigInteger('numCnaps')->nullable();
             $table->decimal('salaire',30,2);
             $table->date('dateEmbauche');
             $table->timestamps();
