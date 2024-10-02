@@ -140,7 +140,7 @@
             border-color: #80bdff;
         }
         .btn-submit {
-            background: linear-gradient(to right, #f72585, #b5179e);
+            background: rgb(36, 36, 207);
             border: none;
             color: #fff;
             padding: 10px 20px;
@@ -149,7 +149,7 @@
             transition: background 0.3s ease;
         }
         .btn-submit:hover {
-            background: linear-gradient(to right, #b5179e, #7209b7);
+            background: rgb(97, 97, 194);
         }
         .form-group label {
             font-weight: bold;
@@ -209,8 +209,7 @@
     <style>
         .active{
             color: #eef1f7 !important;
-            background: #c71b97;
-            background: linear-gradient(to right, #f72585, #b5179e);
+            background: #335efd;
             border-radius: 5px;
             width: 75%;
             padding-left: 10px;
@@ -220,8 +219,7 @@
         }
         .sidestyle li:hover{
             color: #eef1f7 !important;
-            background: #c71b97;
-            background: linear-gradient(to right, #f72585, #b5179e);
+            background: #335efd;
             border-radius: 5px;
             width: 75%;
             padding-left: 10px;
@@ -230,6 +228,16 @@
         .sidestyle li:hover > a{
             color: #eef1f7 !important;
         }
+        .row > .col-sm-6:nth-child(1) .overview-item,
+        .row > .col-sm-6:nth-child(3) .overview-item {
+            background-color: blue !important;
+        }
+
+        .row > .col-sm-6:nth-child(2) .overview-item,
+        .row > .col-sm-6:nth-child(4) .overview-item {
+            background-color: rgb(221, 73, 73) !important;
+        }
+
     </style>
 </head>
 

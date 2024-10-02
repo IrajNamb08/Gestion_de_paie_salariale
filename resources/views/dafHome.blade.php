@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-sm-6 col-lg-3">
-        <div class="overview-item overview-item--c1">
+        <div class="overview-item ">
             <div class="overview__inner">
                 <div class="overview-box clearfix">
                     <div class="icon">
@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="col-sm-6 col-lg-3">
-        <div class="overview-item overview-item--c2">
+        <div class="overview-item ">
             <div class="overview__inner">
                 <div class="overview-box clearfix">
                     <div class="icon">
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="col-sm-6 col-lg-3">
-        <div class="overview-item overview-item--c3">
+        <div class="overview-item ">
             <div class="overview__inner">
                 <div class="overview-box clearfix">
                     <div class="icon">
@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="col-sm-6 col-lg-3">
-        <div class="overview-item overview-item--c4">
+        <div class="overview-item ">
             <div class="overview__inner">
                 <div class="overview-box clearfix">
                     <div class="icon">
